@@ -3,9 +3,9 @@
 
 
 # Answer 1
-#function converting degrees (d), minutes (m), seconds (s) into radian
 
-{rad <- function(d, m, s){
+
+{rad <- function(d, m, s){ #function converting degrees (d), minutes (m), seconds (s) into radian
   radi <- (pi/180)*(d+(m/60)+(s/3600))
     return(radi)
   
@@ -30,9 +30,7 @@ eqs <- read.delim("C:/Users/Baran/Desktop/Computer in Geosciences Course/Week3_E
 
 colnames(eqs) <- c("x", "r", "Mo") # "X(km)", "r(m)", "Mo(Nm)"
 
-#3a)
-
-#mean, median, standard deviation, and median absolute deviation (MAD) for r and Mo? 
+#3a)mean, median, standard deviation, and median absolute deviation (MAD) for r and Mo? 
 
 mean(eqs$r)
 median(eqs$r)
@@ -43,3 +41,4 @@ mean(eqs$Mo)
 median(eqs$Mo)
 sd(eqs$Mo)
 mad(eqs$Mo)
+
