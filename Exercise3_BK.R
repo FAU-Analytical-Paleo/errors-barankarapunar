@@ -42,3 +42,44 @@ median(eqs$Mo)
 sd(eqs$Mo)
 mad(eqs$Mo)
 
+#b) Make one descriptive plot each, of Mo and r (eg. histograms, boxplots, scatter, logged etc). 
+#Are there any obvious outliers that can cause problems?
+
+boxplot(eqs$Mo)
+boxplot(eqs$r)
+
+#c) Are there any outliers apparent, either from looking at the numbers or plotting? 
+#A good criterion is eliminating points exceeding 3*MAD from the median. 
+#Eliminate them to make a TRIMMED set, and recalculate the mean, median and standard deviation. 
+
+ss1 <- subset(eqs[eqs$Mo < median(eqs$Mo)+3*mad(eqs$Mo),])
+
+ss2 <- subset(ss1[ss1$Mo > median(eqs$Mo)-3*mad(eqs$Mo),])
+
+mean(ss2$Mo)
+median(ss2$Mo)
+sd(ss2$Mo)
+
+ss1 <- subset(eqs[eqs$r < median(eqs$r)+(3*mad(eqs$r)),])
+
+ss2 <- subset(ss1[ss1$r > median(eqs$r)-(3*mad(eqs$r)),])
+
+mean(ss2$r)
+median(ss2$r)
+sd(ss2$r)
+
+print(paste0("No outliers found"))
+
+#What is your “best” estimate, and uncertainty, in Mo?
+
+error <- qnorm(0.975)*((sd(eqs$Mo))/sqrt(length(eqs$Mo))) # 95% confidence interval
+
+print(paste0(mean(eqs$Mo), " +- ", error))
+
+#d)The “moment” magnitude of an earthquake is calculated from the equation
+
+Mw <- (log10(mean(eqs$Mo))/1.5)-6
+Mw_e <- (log10(error)/1.5)-6
+
+print(paste0(Mw, " +- ", Mw_e))
+  
